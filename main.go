@@ -27,6 +27,8 @@ func main() {
 		return
 	}
 
+	fmt.Println(string(body))
+
 	// file, err := os.Open("releases.json")
 	// if err != nil {
 	// 	fmt.Println("Error opening JSON file:", err)
