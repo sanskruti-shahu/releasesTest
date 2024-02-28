@@ -27,7 +27,8 @@ func main() {
 		return
 	}
 
-	fmt.Println(string(body))
+	// fmt.Println(string(body))
+	fmt.Println("Data fetched")
 
 	// file, err := os.Open("releases.json")
 	// if err != nil {
@@ -84,6 +85,8 @@ func main() {
 		fmt.Println("Error writing main page: ", err)
 		return
 	}
+
+	fmt.Println("All files written and now server started")
 
 	http.Handle("/", http.FileServer(http.Dir(".")))
 	http.ListenAndServe(":8080", nil)
