@@ -10,23 +10,35 @@ import (
 
 func main() {
 
-	const githubApiEndpoint = "https://api.github.com/repos/opentofu/opentofu/releases"
+	// const githubApiEndpoint = "https://api.github.com/repos/opentofu/opentofu/releases"
 
-	mainPageContent := "<ul>\n<li>\n<a href=\"../\">../</a></li>\n"
+	// mainPageContent := "<ul>\n<li>\n<a href=\"../\">../</a></li>\n"
 
-	response, err := http.Get(githubApiEndpoint)
+	// response, err := http.Get(githubApiEndpoint)
+	// if err != nil {
+	// 	fmt.Println("Error fetching releases: ", err)
+	// 	return
+	// }
+	// defer response.Body.Close()
+
+	// body, err := io.ReadAll(response.Body)
+	// if err != nil {
+	// 	fmt.Println("Error reading response body: ", err)
+	// 	return
+	// }
+
+	file, err := os.Open("releases.json")
 	if err != nil {
-		fmt.Println("Error fetching releases: ", err)
+		fmt.Println("Error opening JSON file:", err)
 		return
 	}
-	defer response.Body.Close()
+	defer file.Close()
 
-	body, err := io.ReadAll(response.Body)
+	body, err := io.ReadAll(file)
 	if err != nil {
-		fmt.Println("Error reading response body: ", err)
+		fmt.Println("Error reading JSON file:", err)
 		return
 	}
-
 	releases := []map[string]interface{}{}
 	if err := json.Unmarshal(body, &releases); err != nil {
 		fmt.Println("Error unmarshalling JSON: ", err)
